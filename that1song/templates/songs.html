@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="add" method="POST">
+    <input type="hidden" name="s" value="{{search}}">
+    <table>
+        {% for song in songs %}
+        <tr>
+            <td>{{song.name}}<input type="hidden" name="song_id" value="{{song.id}}"></td>
+            <td>{% for artist in song['artists'] %}{{artist}}{%endfor%}</td>
+            <td>{{song.popularity}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+    <input type="submit">
+</form>
+{% endblock %}
