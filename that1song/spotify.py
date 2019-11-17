@@ -17,6 +17,7 @@ class Spotify:
             authorize_url='https://accounts.spotify.com/authorize',
             access_token_url='https://accounts.spotify.com/api/token')
 
+        # Get a access token for API calls which don't need user authorization, e.g. searching for songs.
         token = self.oauth.get_access_token(
             decoder = Spotify.utf8_json_decoder,
             data = { "grant_type": "client_credentials"})
@@ -165,14 +166,15 @@ class Spotify:
 
         return ret
 
-
+    # Get the URL to redirect the user to so that they can grant this app precision.
+    # When the user gives us access Spotify will redirect the user to the callback URL we specify.
     def get_authorize_url(self, callback_url):
         return self.oauth.get_authorize_url(
             scope = 'playlist-modify-private playlist-read-private',
             response_type = 'code',
             redirect_uri = callback_url)
 
-
+    # Use the authorization code Spotify gave us to get a token we can use for authorized calls.
     def authorize(self, code, callback_url):
         token = self.oauth.get_access_token(
             decoder = Spotify.utf8_json_decoder,
