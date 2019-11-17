@@ -144,12 +144,26 @@ class Spotify:
 
     # Get a user's playlists
     def get_playlists(self, user):
-        playlists = user['session'].get(f'me/playlists').json()
-        return [
-            {'id': playlist['id'], 'name': playlist['name']}
-            for playlist
-            in playlists['items']
-        ]
+        ret = []
+        more = True
+        take = 50
+        skip = 0
+        while more:
+            playlists = user['session'].get(f'me/playlists', params = { 'limit': take, 'offset': skip }).json()
+            ret.extend(
+                (
+                    {'id': playlist['id'], 'name': playlist['name']}
+                    for playlist
+                    in playlists['items']
+                )
+            )
+            skip += take
+            more = playlists['next']
+
+        print('get_playlists')
+        print(len(ret))
+
+        return ret
 
 
     def get_authorize_url(self, callback_url):
