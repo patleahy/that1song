@@ -1,7 +1,8 @@
-from flask import Flask, render_template, redirect, request, session, url_for
+from flask import Flask, render_template, redirect, request, session, url_for, send_from_directory
 from flask_session import Session
 from waitress import serve
 import config
+import os
 from spotify import Spotify
 
 
@@ -106,6 +107,11 @@ def authorize():
         return redirect('/added?id=' + playlist_id)
 
     redirect('/')
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static/img'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 if __name__ == '__main__':
