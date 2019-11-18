@@ -17,6 +17,10 @@ a:active {
     font-size: larger;
 }
 
+footer {
+    font-size: small;
+}
+
 form {
     padding-top: 3rem;
     padding-bottom: 3rem;
