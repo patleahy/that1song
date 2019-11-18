@@ -35,7 +35,8 @@ class Spotify:
         # We have to get 50 songs at a time.
         skip = 0
         take = 50
-        while len(songs) < count:
+        more = True
+        while len(songs) < count and more:
             tracks = self.public_session.get(
                 'search',
                 params={
@@ -45,8 +46,8 @@ class Spotify:
                     'offset': skip
                 }).json()
 
-            if not tracks:
-                # There are not more songs to find.
+            if not tracks or 'error' in tracks:
+                # There are no more songs to find.
                 break
 
             # Search could find the search string in other places besides the name
@@ -81,6 +82,7 @@ class Spotify:
                 if canonical_name in Spotify.canonical_name(track['name'])
             ])
 
+            more = tracks['tracks']['next']
             skip += take
 
         # Its possible that the loop above could add a few too many songs.
