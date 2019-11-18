@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <form method="get">
-    <input name="s" type="text" required>
-    <input type="submit" value="Search">
-  </form>
+<div class="row">
+    <dev class="col text-center">
+      <p class="lead">I was listening to random songs on Spotify while working. <a href="https://open.spotify.com/track/5DLyk84fKs0ATGTzvZQmFM" target="_blank">Jess Gillam's</a> cover of Bowie's "<a href="https://open.spotify.com/track/6GrDJu7q8VAxbKdUlYzezT">Where are we now?</a>" caught my attention. I taught there must be other great covers of the song. I created <a href="/?s=where+are+we+now">that1song</a> to make playlists of covers of songs.</p>
+    </dev>
+  </div>
+</div>
+
+<form method="get">
+  <input name="s" type="text" required>
+  <input type="submit" value="Search">
+</form>
 {% endblock %}
