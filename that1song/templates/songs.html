@@ -2,16 +2,29 @@
 
 {% block content %}
 <form action="add" method="POST">
-    <input type="hidden" name="s" value="{{search}}">
-    <table>
-        {% for song in songs %}
-        <tr>
-            <td>{{song.name}}<input type="hidden" name="song_id" value="{{song.id}}"></td>
-            <td>{% for artist in song['artists'] %}{{artist}}{%endfor%}</td>
-            <td>{{song.popularity}}</td>
-        </tr>
-        {%endfor%}
-    </table>
-    <input type="submit">
+  <div class="row">
+    <div class="col text-center">
+      <button type="submit" class="btn btn-primary"><i class="fab fa-spotify"></i>&nbsp;Make&nbsp;Playlist</button>
+    </div>
+  </div>
+  <input type="hidden" name="s" value="{{search}}">
+  <div class="row">
+    {% for song in songs %}
+    <div class="col-3 text-center song-col">
+      <div class="song-panel">
+        <input type="hidden" name="song_id" value="{{song.id}}">
+        <p class="link"><a href="{{song.url}}"><img src="{{song.icon_url}}"></a></p>
+        <p class="artists">{{song.artists}}</p>
+        <p class="name">{{song.name}}</p>
+        <p class="date">{{song.release_date}}</p>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <button type="submit" class="btn btn-primary"><i class="fab fa-spotify"></i>&nbsp;Make&nbsp;Playlist</button>
+    </div>
+  </div>
 </form>
 {% endblock %}

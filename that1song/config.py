@@ -9,4 +9,4 @@ SESSION_TYPE = 'filesystem' # TODO Use something else
 AUTHORIZE_CALLBACK = "http://that1song.com:5000/authorize"
 
 # The number of songs to return in searches.
-MAX_SONGS = 30 
+MAX_SONGS = 32

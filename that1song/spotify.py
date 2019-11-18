@@ -56,7 +56,25 @@ class Spotify:
                     'name': track['name'],
                     'artists': [ artist['name'] for artist in track['artists'] ],
                     'popularity': track['popularity'],
-                    'id': Spotify.uri_to_id(track['uri'])
+                    'id': Spotify.uri_to_id(track['uri']),
+                    'url': track['album']['external_urls']['spotify'],
+                    'icon_url': next(
+                        (
+                            image['url']
+                            for image
+                            in track['album']['images']
+                            if image['width'] == 64
+                        ),
+                        None
+                    ),
+                    'artists': ', '.join(
+                        (
+                            artist['name']
+                            for artist
+                            in track['album']['artists']
+                        )
+                    ),
+                    'release_date': track['album']['release_date'][0:4]
                 }
                 for track
                 in tracks['tracks']['items']

@@ -25,3 +25,35 @@ form {
 .btn-primary {
     margin: 1rem;
 }
+
+.song-col {
+    padding: 10px;
+}
+
+.song-panel {
+    background-color: #faebf0;
+    height: 100%;
+    padding-bottom: 10px;
+    border-radius: 10px;
+}
+
+.song-panel p {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
+.song-panel .link {
+    padding: 0.5em;
+}
+
+.song-panel .artists {
+    font-weight: bold;
+}
+
+.song-panel .name {
+    font-style: italic;
+}
+
+.song-panel .date {
+    font-size: small;
+}
