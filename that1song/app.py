@@ -93,6 +93,7 @@ def added():
 
 # Spotify redirects here after a user has been authorized
 # Note, this URL has to be regestered with Spotify.
+# TODO - THe user can cancel authorization.
 @app.route('/authorize')
 def authorize():
     code = request.args.get('code')
