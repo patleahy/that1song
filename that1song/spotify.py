@@ -154,6 +154,8 @@ class Spotify:
         playlist = user['session'].get(f'playlists/{playlist_id}').json()
         return {
             'name': playlist['name'],
+            'url': playlist['external_urls']['spotify'],
+            'icon_url': playlist['images'][0]['url'],
             'songs': [
                 { 'name': item['track']['name'], 'id': item['track']['id'] }
                 for item

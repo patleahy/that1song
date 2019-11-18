@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
+{% block title %} &dash; {{search}}{% endblock %}
+
 {% block content %}
 <form action="add" method="POST">
   <div class="row">
     <div class="col text-center">
-      <button type="submit" class="btn btn-primary"><i class="fab fa-spotify"></i>&nbsp;Make&nbsp;Playlist</button>
+      <button type="submit" class="btn btn-primary"><i class="fab fa-spotify"></i> Make Playlist</button>
     </div>
   </div>
   <input type="hidden" name="s" value="{{search}}">
@@ -23,7 +25,7 @@
   </div>
   <div class="row">
     <div class="col text-center">
-      <button type="submit" class="btn btn-primary"><i class="fab fa-spotify"></i>&nbsp;Make&nbsp;Playlist</button>
+      <button type="submit" class="btn btn-primary"><i class="fab fa-spotify"></i> Make Playlist</button>
     </div>
   </div>
 </form>

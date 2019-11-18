@@ -61,3 +61,13 @@ form {
 .song-panel .date {
     font-size: small;
 }
+
+.alert-success {
+    background-image: none;
+    background-color: #faebf0;
+    padding: 1em;
+}
+
+.playlist img {
+    width: 480px;
+}

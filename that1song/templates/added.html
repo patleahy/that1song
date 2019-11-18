@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
 
+{% block title %} &dash; {{playlist.name}}{% endblock %}
+
 {% block content %}
-  {{playlist}}
+<div class="row">
+    <div class="col text-center">
+      <a href="{{playlist.url}}" class="btn btn-primary"><i class="fab fa-spotify"></i> Open Playlist</a>
+    </div>
+  </div>
+<div class="row playlist">
+  <div class="col text-center">
+    <a href="{{playlist.url}}">
+      <p class="image"><img src="{{playlist.icon_url}}">
+    </a>
+  </div>
+</div>
+<dev class="form-row">
+    <dev class="col offset-4 col-4 text-center">
+      <form method="get" action="/">
+        <input name="s" type="text" class="form-control" required>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-guitar"></i> Search Again</button>
+      </form>
+    </dev>
+  </dev>
 {% endblock %}
