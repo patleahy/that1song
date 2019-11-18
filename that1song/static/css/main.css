@@ -5,3 +5,23 @@ a:active {
   color: #db467b;
   text-decoration: none;
 }
+
+.btn-primary,
+.btn-primary:link,
+.btn-primary:visited,
+.btn-primary:hover,
+.btn-primary:active {
+    background: #db467b;
+    color: white;
+    border: none;
+    font-size: larger;
+}
+
+form {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.btn-primary {
+    margin: 1rem;
+}
