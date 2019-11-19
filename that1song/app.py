@@ -2,9 +2,12 @@ from flask import Flask, render_template, redirect, request, session, url_for, s
 from flask_session import Session
 from waitress import serve
 import config
+import random
 import os
 import re
+import urllib
 from spotify import Spotify
+import examples
 
 
 # Setup the flask application.
@@ -31,6 +34,11 @@ def index():
 
     # We will filter songs so we search for many more than we want.
     songs = spotify.get_songs(search, config.MAX_SONGS * 10)    
+
+    if not (songs and len(songs)):
+        # There are not songs.
+        return render_template('nosongs.html', examples=random.sample(examples.searches, 4))
+
     songs.sort(key = lambda item: item['popularity'], reverse = True)
 
     # Only allow 1 song from each artist.
@@ -132,6 +140,11 @@ def _titlecase(text):
     text = re.sub('\sOf\s', ' of ', text)
     text = re.sub('\sA\s', ' a ', text)
     return text
+
+
+@app.template_filter('quote_plus')
+def quote_plus(text):
+    return urllib.parse.quote_plus(text)
 
 
 if __name__ == '__main__':
