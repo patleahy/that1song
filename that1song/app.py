@@ -3,6 +3,7 @@ from flask_session import Session
 from waitress import serve
 import config
 import os
+import re
 from spotify import Spotify
 
 
@@ -68,7 +69,7 @@ def add():
         return redirect(spotify.get_authorize_url(config.AUTHORIZE_CALLBACK))
 
     # Make the playlist.
-    playlist_id = spotify.make_playlist(spotify_user, name, song_ids)
+    playlist_id = spotify.make_playlist(spotify_user, _titlecase(name), song_ids)
 
     # Show the results using the Post/Redirect/Get pattern.
     return redirect('/added?id=' + playlist_id)
@@ -103,7 +104,7 @@ def authorize():
     add = session.pop('add')
     if add:
         spotify_user = spotify.get_user()
-        playlist_id = spotify.make_playlist(spotify_user, add['name'], add['song_ids'])
+        playlist_id = spotify.make_playlist(spotify_user, _titlecase(add['name']), add['song_ids'])
         # Show the results
         return redirect('/added?id=' + playlist_id)
 
@@ -113,6 +114,15 @@ def authorize():
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static/img'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+
+# Title case a string.
+def _titlecase(text):
+    text = re.sub(r"[A-Za-z]+('[A-Za-z]+)?", lambda match: match.group(0).capitalize(), text)
+    text = re.sub('\s+The\s+', ' the ', text)
+    text = re.sub('\sOf\s', ' of ', text)
+    text = re.sub('\sA\s', ' a ', text)
+    return text
 
 
 if __name__ == '__main__':
