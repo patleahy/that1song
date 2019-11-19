@@ -88,7 +88,7 @@ def added():
 
     # Get and show the playlist
     playlist = spotify.get_playlist(spotify_user, playlist_id)
-    return render_template('added.html', playlist=playlist)
+    return redirect(playlist['url'])
 
 
 # Spotify redirects here after a user has been authorized
