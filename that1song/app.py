@@ -27,7 +27,7 @@ def index():
     search = request.args.get('s')
     if not search:
         # No argument so show the form
-        return render_template('search.html')
+        return render_template('search.html', error=session.pop('error', None))
 
     # We will filter songs so we search for many more than we want.
     songs = spotify.get_songs(search, config.MAX_SONGS * 10)    
@@ -97,7 +97,16 @@ def added():
 # TODO - THe user can cancel authorization.
 @app.route('/authorize')
 def authorize():
+    error = request.args.get('error')
     code = request.args.get('code')
+
+    if error or not code:
+        session['error'] = \
+            "Oh No! We can't access your Spotify account. " \
+            "You can still search for lists of songs. " \
+            "We just can't make a playlist for you."
+        return redirect('/')
+
     spotify.authorize(code, config.AUTHORIZE_CALLBACK)
 
     # If the user had to authorize wile adding a playlist then do that now.

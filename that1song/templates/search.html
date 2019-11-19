@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if error %}
+<div class="alert alert-warning text-center" role="alert">{{error}}</div>
+{% else %}
 <div class="row">
   <dev class="col text-center">
     <p class="lead">I was listening to random songs on Spotify while working. <a
@@ -11,6 +14,7 @@
   </dev>
 </div>
 </div>
+{% endif %}
 
 <dev class="form-row">
   <dev class="col offset-4 col-4 text-center">
