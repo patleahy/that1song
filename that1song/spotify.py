@@ -183,9 +183,6 @@ class Spotify:
             skip += take
             more = playlists['next']
 
-        print('get_playlists')
-        print(len(ret))
-
         return ret
 
     # Get the URL to redirect the user to so that they can grant this app precision.
