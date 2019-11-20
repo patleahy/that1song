@@ -12,7 +12,7 @@
   <input type="hidden" name="s" value="{{search}}">
   <div class="row">
     {% for song in songs %}
-    <div class="col-3 text-center song-col">
+    <div class="col-md-3 col-sm-6 text-center song-col">
       <div class="song-panel">
         <input type="hidden" name="song_id" value="{{song.id}}">
         <p class="link"><a href="{{song.url}}"><img src="{{song.icon_url}}"></a></p>
