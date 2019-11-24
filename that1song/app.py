@@ -33,7 +33,7 @@ def index():
         return render_template('search.html', error=session.pop('error', None))
 
     # We will filter songs so we search for many more than we want.
-    songs = spotify.get_songs(search, config.MAX_SONGS * 10)    
+    songs = spotify.get_songs(search, config.MAX_SONGS * 10)
 
     if not (songs and len(songs)):
         # There are not songs.
