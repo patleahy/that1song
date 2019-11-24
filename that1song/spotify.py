@@ -17,13 +17,6 @@ class Spotify:
             authorize_url='https://accounts.spotify.com/authorize',
             access_token_url='https://accounts.spotify.com/api/token')
 
-        # Get a access token for API calls which don't need user authorization, e.g. searching for songs.
-        token = self.oauth.get_access_token(
-            decoder = Spotify.utf8_json_decoder,
-            data = { "grant_type": "client_credentials"})
-
-        self.public_session =  self.oauth.get_session(token)
-
 
     # Get a list of songs with search in the name
     def get_songs(self, search, count):
@@ -37,7 +30,7 @@ class Spotify:
         take = 50
         more = True
         while len(songs) < count and more:
-            tracks = self.public_session.get(
+            tracks = self.get_public_session().get(
                 'search',
                 params={
                     'q': search,
@@ -48,6 +41,7 @@ class Spotify:
 
             if not tracks or 'error' in tracks:
                 # There are no more songs to find.
+                print(f"get_songs {tracks}")
                 break
 
             # Search could find the search string in other places besides the name
@@ -204,6 +198,15 @@ class Spotify:
             }
         )
         session['token'] = token
+
+
+    # Get a session API calls which don't need user authorization, e.g. searching for songs.
+    def get_public_session(self):
+        token = self.oauth.get_access_token(
+            decoder = Spotify.utf8_json_decoder,
+            data = { "grant_type": "client_credentials"})
+
+        return self.oauth.get_session(token)
 
 
     # We don't want white space of punctuation to confuse us when comparing song names.
