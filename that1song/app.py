@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, session, url_for, s
 from flask_session import Session
 from waitress import serve
 import config
+from datetime import timedelta
 import random
 import os
 import re
@@ -11,14 +12,12 @@ import examples
 
 
 # Setup the flask application.
-# All setting come from environment variables.
 app = Flask(__name__)
 app.config.from_object('config')
+app.permanent_session_lifetime = timedelta(minutes=config.SESSION_TIMEOUT_MINUTES)
 Session(app)
 
-spotify = Spotify(
-    config.SPOTIFY_CLIENT_ID, 
-    config.SPOTIFY_CLIENT_SECRET)
+spotify = Spotify(config.SPOTIFY_CLIENT_ID, config.SPOTIFY_CLIENT_SECRET)
 
 
 # Index page shows the form to enter a song name.
@@ -145,6 +144,13 @@ def _titlecase(text):
 @app.template_filter('quote_plus')
 def quote_plus(text):
     return urllib.parse.quote_plus(text)
+
+
+@app.before_request
+def make_session_permanent():
+    # This is not really permanent, permanent rally means longer that a browser session.
+    # We actually want it to be short. It is set in the config.
+    session.permanent = True
 
 
 if __name__ == '__main__':
