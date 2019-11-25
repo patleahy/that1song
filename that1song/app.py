@@ -132,6 +132,12 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static/img'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
+# Used by loadbalancers to check are we up.
+@app.route('/hello')
+def hello():
+    return 'hello'
+
+
 # Title case a string.
 def _titlecase(text):
     text = re.sub(r"[A-Za-z]+('[A-Za-z]+)?", lambda match: match.group(0).capitalize(), text)
