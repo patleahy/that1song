@@ -33,5 +33,10 @@ searches = [
         'name': 'Take On Me',
         'img': 'https://i.scdn.co/image/ab67616d00004851e8dd4db47e7177c63b0b7d53',
         'msg': '<a href="https://open.spotify.com/album/1ER3B6zev5JEAaqhnyyfbf">a-ha</a> &amp; <a href="https://open.spotify.com/album/65sHj9PvsbyD0uugGHjueN">Weezer</a>,<br/>but not <a href="https://www.youtube.com/watch?v=-xKM3mGt2pE">a-ha 2017 unplugged</a> version.'
+    },
+    {
+        'name': 'Africa',
+        'img': 'https://i.scdn.co/image/ab67616d00004851673d6a2831f72e48745ea80d',
+        'msg': '<a href="https://open.spotify.com/album/62U7xIHcID94o20Of5ea4D">TOTO</a> &amp; <a href="https://open.spotify.com/album/65sHj9PvsbyD0uugGHjueN">Weezer</a>'
     }
 ]
