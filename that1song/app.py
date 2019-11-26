@@ -14,7 +14,6 @@ import examples
 # Setup the flask application.
 app = Flask(__name__)
 app.config.from_object('config')
-app.permanent_session_lifetime = timedelta(minutes=config.SESSION_TIMEOUT_MINUTES)
 Session(app)
 
 spotify = Spotify(config.SPOTIFY_CLIENT_ID, config.SPOTIFY_CLIENT_SECRET)
