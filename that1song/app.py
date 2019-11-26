@@ -146,7 +146,7 @@ def hello():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('nosongs.html'), 404
+    return render_template('nosongs.html', examples=random.sample(examples.searches, 4)), 404
 
 
 # Title case a string.
