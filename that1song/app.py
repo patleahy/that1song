@@ -48,6 +48,10 @@ def index():
         if artists in found_artists:
             continue
 
+        if re.search("karaoke", song['name'], re.IGNORECASE):
+            # Don't include karaoke versions.
+            continue
+
         found_artists.append(artists)
         top_songs.append(song)
 
