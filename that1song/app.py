@@ -137,6 +137,11 @@ def hello():
     return 'hello'
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('nosongs.html'), 404
+
+
 # Title case a string.
 def _titlecase(text):
     text = re.sub(r"[A-Za-z]+('[A-Za-z]+)?", lambda match: match.group(0).capitalize(), text)
