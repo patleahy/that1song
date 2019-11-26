@@ -58,6 +58,9 @@ def index():
         if len(top_songs) == config.MAX_SONGS:
             break
 
+    if not len(top_songs):
+        return render_template('nosongs.html', examples=random.sample(examples.searches, 4))
+
     # Show the songs.
     return render_template('songs.html', search=search, songs=top_songs)
 
