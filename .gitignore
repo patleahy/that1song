@@ -137,3 +137,6 @@ Include/
 Scripts/
 
 tcl/
+
+env.bat
+pyvenv.cfg

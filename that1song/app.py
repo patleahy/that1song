@@ -23,7 +23,7 @@ spotify = Spotify(config.SPOTIFY_CLIENT_ID, config.SPOTIFY_CLIENT_SECRET)
 # It also handles to post back from the form.
 @app.route('/')
 def index():
-    
+
     # If the user clicked search there will be an 's' argument
     search = request.args.get('s')
     if not search:
@@ -37,19 +37,24 @@ def index():
         # There are not songs.
         return render_template('nosongs.html', examples=random.sample(examples.searches, 4))
 
+
     songs.sort(key = lambda item: item['popularity'], reverse = True)
 
     # Only allow 1 song from each artist.
     top_songs = []
     found_artists = []
-    
+    search_simple = simpleName(search)
+
     for song in songs:
         artists = song['artists']
         if artists in found_artists:
             continue
 
-        if re.search("karaoke", song['name'], re.IGNORECASE):
-            # Don't include karaoke versions.
+        name = song['name']
+
+        # if distance(search_simple, simpleName(name)) > 3:
+        if search_simple != simpleName(name):
+            # Ignore songs that are not like the search term
             continue
 
         found_artists.append(artists)
@@ -63,6 +68,13 @@ def index():
 
     # Show the songs.
     return render_template('songs.html', search=search, songs=top_songs)
+
+
+def simpleName(name):
+    name = name.strip()
+    name = re.sub(r'\s+',' ', name)
+    name = re.sub(r'\W+', '', name)
+    return name.lower()
 
 
 # Handles when the user clicks the Add button on the list of songs.
